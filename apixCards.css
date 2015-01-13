@@ -1,0 +1,119 @@
+.apix-card-wrapper {
+    height:100%;
+    overflow:hidden;
+    box-shadow: 0 0 10px blue;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+.apix-card-wrapper:hover {
+    box-shadow: 0 0 10px red;
+}
+.apix-card-container{
+    position:relative;
+    padding-right:5px;
+    padding-left:15px;
+    margin-top:50px;
+}
+
+.apix-toolbar-background{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background:#0081CB;
+    opacity:0.8;
+}
+.apix-toolbar-container{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:100;
+}
+.apix-card-toolbar{
+    position:relative;
+    display:none;
+    height:64px;
+    position:absolute;
+    left:15px;
+    right:5px;
+    bottom:0;
+    z-index:100;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow:hidden;
+}
+.apix-cards-big-toolbar{
+    width:100%;
+    height:128px;
+    position:fixed;
+    bottom:0;
+    left:0;
+    transition:all linear 0.2s;
+    z-index:1000;
+}
+.apix-card-toolbar-icon{
+    width:32px;
+    height: 32px;
+    display:inline-block;
+    cursor:pointer;
+    top:16px;
+    position:relative;
+    left:8px;
+    margin-left:16px;
+    transition-property: transform,background;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    background-position: center center;
+    backgrouns-size:contain;
+}
+.apix-card-toolbar-icon:hover{
+    transform:scale(1.2);
+}
+.apix-card-delete-icon{
+    background:url(./img/iconfont-delete.png);
+}
+.apix-card-open-dialog-icon{
+    background:url(./img/iconfont-uipopup.png);
+}
+.apix-card-selected-icon-unselected{
+    background:url(./img/iconfont-xuanzhongwhite.png);
+}
+.apix-card-selected-icon-selected{
+    background:url(./img/iconfont-xuanzhong.png);
+}
+.apix-cards-big-toolbar-icon{
+    width:64px;
+    height:64px;
+    display:inline-block;
+    cursor:pointer;
+    top:32px;
+    position:relative;
+    left:32px;
+    margin-left:32px;
+    transition:all linear 0.5s;
+    background-position: center center;
+    backgrouns-size:contain;
+}
+.apix-cards-big-toolbar-icon:hover{
+    transform:scale(1.2);
+}
+.apix-cards-delete-icon{
+    background:url(./img/iconfont-shanchu.png);
+}
+.apix-cards-cancel-selected-icon{
+    background:url(./img/iconfont-quxiao.png);
+}
+.apix-cards-selected-all-icon-unselected{
+    background:url(./img/iconfont-quanxuanwhite.png);
+}
+.apix-cards-selected-all-icon-selected{
+    background:url(./img/iconfont-quanxuan.png);
+}
+.modal{
+    background:rgba(0,0,0,0.5);
+}

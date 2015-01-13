@@ -1,0 +1,12 @@
+{
+    "name": "cardsLayout",
+    "description": "A cards layout plugin based-on angularJs",
+    "version": "1.0.0",
+    "contributors": [
+        "John Du<bdu@tibco-support.com>"
+    ],
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "scripts": {}
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+    <head>
+        <meta charset='utf-8'>
+        <title>apix2.2</title>
+        <script src='vendor/jquery.min.js'></script>
+        <script src='vendor/angular.js'></script>
+        <script src="vendor/ui-bootstrap-tpls-0.12.0.min.js"></script>
+        <link href='vendor/bootstrap.min.css' rel='stylesheet'>
+        <script src='apixCards.js'></script>
+        <link type="text/css" rel="stylesheet" href="apixCards.css">
+
+
+
+    </head>
+
+    <body ng-app='apixCard' ng-controller='testController'>
+
+
+
+        
+        
+        
+        <!--/**
+     * Global configuration for the card system.
+     * @author John Du<bdu@tibco-support.com>
+     *
+     * @attr{num-of-column} Define how many column in a row of the card system.
+     * @attr{dialog-template-url}Define the template url of the dialog in the popup layer.
+     * @attr{card-template-url}It defines the template inner the card.
+     * @attr{apix-data}It defines all the data of the card.
+     * @attr{dialog-scope}Difines the scope of the dialog template
+     *
+     *
+     *
+     * 
+     * Events:
+         * Usage:
+                $scope.$on(sEventName,fCallback);
+           Event lists:
+                {cardSystemInitialEnd}When the cards layout system is ready will invoke it.
+                    @param{oEvent}Describe some attributes of current event.
+                    @param{cardService}It is the service-{card}.you can invoke some apis of the sercice-{card} by this cardService.
+                {beforeCardDelete}When the delete icon in the toolbar of every card is deleted,this method will be invoked.
+                                    You can use "cardService.confirmDeleteCurrentCard()" to really delete current card.
+                    @param{oEvent}Describe some attributes of current event.
+                    @param{aSelectedCardsIndex}Current selected card's index number.
+                {beforeSelectedCardsDelete}When you are try to deleting all the selected cards,
+                                                this method will be invoked.
+                                                You can use "cardService.confirmDeleteSelectedCards()" to really delete them.
+                    @param{oEvent}Describe some attributes of current event.
+                    @param{aSelectedCardsIndex}It is an array type,includes all the index of selected cards.
+                {selectedCardsDeleteSuccess}When all the selected cards are really deleted,this method will be invoked.
+                    @param{oEvent}Describe some attributes of current event.
+                    @param{aSelectedCardsIndex}It is an array type,includes all the indexes of selected cards.
+                {scrollBottom}When the scrollBar is scrolled to the bottom of the window,this method will be invoked.
+                                at this time,you can show your custom loading layer and fetch more data.
+                    @param{oEvent}Describe some attributes of current event.
+                {dialogOpen}When you clicked the icon to open the dialog,this method will be invoked.
+                    @param{oEvent}Describe some attributes of current event.
+                    @param{nIndex}Index of current operating card.
+                    @param{oCurrentCardData}Include all the data of current operating card.
+                {cardDeleteSuccess}When one card is really deleted,this method will be invoked.
+                    @param{oEvent}Describe some attributes of current event.
+                    @param{nCurrentDeletingCardIndex}It is the index of current deleting card.
+                {cardMouseEnter}
+                {cardMouseMove}
+                {cardMouseLeave}
+                {cardClick}
+                    They are some dom operate for single card,maybe you will use them in some occasions.
+                    @param{oEvent}Describe some attributes of current event.
+                    @param{nIndex}Index of current operating card.
+
+     *
+     * 
+     */-->
+
+        <!--height-divide-width="0.5"-->
+        <div style="overflow-x:hidden;overflow-y:scroll;width:800px;height:400px;background:pink;margin:0 auto;">
+            <cards-layout
+                    num-of-column="4"
+                    dialog-template-url= "./dialog.tpl.html"
+                    card-template-url= "./cards.tpl.html"
+                    apix-data="cardData"
+                    dialog-scope="dialogScope"
+                    >
+            </cards-layout>
+        </div>
+
+    </body>
+
+</html>
+
+
+<script type='text/javascript'>
+    angular.module('apixCard').controller('testController',function($scope){
+        $scope.dialogScope=$scope;
+        $scope.cardData=(function(){
+            var returnJsonArr=[];
+            for(var i=0;i<12;i++){
+                returnJsonArr.push({
+                    name:'name'+parseInt(Math.random()*10000,10),
+                    email:'email'+parseInt(Math.random()*10000,10)
+                });
+            }
+            return returnJsonArr;
+        })();
+        $scope.$on('cardSystemInitialEnd',function(oEvent,cardService){
+            console.log('我监听的事件是卡片布局系统初始化完毕，此刻我们的卡片系统刚刚初始化完毕');
+            $scope.$on('beforeCardDelete',function(oEvent,nCurrentDeletingCardIndex){
+                if(window.confirm('你真的要删除么')){
+                    if(window.confirm('不好意思再问一下你真的真的要删除我么')){
+                        cardService.confirmDeleteCurrentCard();
+                    }else{
+                            console.log('删除失败,你看着整吧');
+                    }
+                }else{
+                        console.log('删除失败,你看着整吧');
+                }
+            });
+            $scope.$on('beforeSelectedCardsDelete',function(oEvent,aSelectedCardsIndex){
+                if(window.confirm('你真的要删除么')){
+                    if(window.confirm('不好意思再问一下你真的真的要删除我么')){
+                        cardService.confirmDeleteSelectedCards();
+                    }else{
+                        console.log('删除失败,你看着整吧');
+                    }
+                }else{
+                    console.log('删除失败,你看着整吧');
+                }
+            });
+            $scope.$on('selectedCardsDeleteSuccess',function(oEvent,aSelectedCardsIndex){
+                console.log('恭喜，所有选中的卡片已经删除');
+            })
+            $scope.$on('dialogOpen',function(oEvent,nIndex,oCurrentCardData){
+                console.log("augumentsssssssssssss",arguments);
+                console.log('你打开的是第'+nIndex+'号卡片的dialog哦,oCurrentCardData表示你当前操作的卡片对应的全部数据' +
+                '请您慢慢欣赏',oCurrentCardData);
+            })
+            $scope.$on('scrollBottom',function(event){
+                console.log('亲爱的，您的浏览器滚动到底部了哦');
+                var data=[];
+                for(var i=0;i<12;i++){
+                    data.push({
+                        name:'name'+parseInt(Math.random()*10000,10),
+                        email:'email'+parseInt(Math.random()*10000,10)
+                    });
+                }
+                $scope.$apply(function() {
+                    for (var j in data) {
+                        $scope.cardData.push(data[j]);
+                    }
+                });
+            })
+            $scope.$on('cardDeleteSuccess',function(oEvent,nCurrentDeletingCardIndex){
+                console.log("恭喜，你通过$on中制定的删除事件删除了"+nCurrentDeletingCardIndex+'号卡片');
+            });
+            $scope.$on('cardClick',function(oEvent,nIndex){
+                console.log('我坚挺的是卡片点击事件，只要你点击到卡片上除了浮层外任何部分都吹触发到我，哈哈哈');
+            })
+            $scope.$on('cardMouseEnter',function(oEvent,nIndex){
+                console.log('我监听了一个鼠标移入事件，当前卡片索引 is',nIndex);
+            })
+            $scope.$on('cardMouseLeave',function(oEvent,nIndex){
+                console.log('我监听了一个鼠标移出事件，当前卡片索引 is',nIndex);
+            })
+            $scope.$on('cardMouseMove',function(oEvent,nIndex){
+                console.log('我监听了一个卡片鼠标移动事件，当前卡片索引 is',nIndex);
+            })
+        })
+    });
+</script>

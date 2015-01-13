@@ -1,0 +1,14 @@
+{
+    "name": "cardsLayout",
+    "description": "A cards layout plugin based-on angularJs",
+    "authors": [
+        "John Du<bdu@tibco-support.com>"
+    ],
+    "directory": "vendor",
+    "dependencies": {
+        "angular": "1.3.x",
+        "angular-ui-bootstrap": "0.12.x",
+        "bootstrap": "3.3.x",
+        "jquery": "1.11.x"
+    }
+}

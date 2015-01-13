@@ -1,0 +1,40 @@
+<div>
+        <div ng-transclude>
+
+        </div>
+        <div
+            single-card
+            current-index="{{$index}}"
+            ng-mouseenter="card.cardMouseEnter($event,$index)"
+            ng-mousemove="card.emit('cardMouseMove',$index)"
+            ng-mouseleave="card.cardMouseLeave($event,$index)"
+            ng-click="card.emit('cardClick',$index)"
+            style="height:{{card.cardHeight}};"
+            ng-repeat="data in apixData"
+            class="apix-card-container col-md-{{(12/numOfColumn||4)}}">
+            <div class="apix-card-toolbar"
+                ng-click="card.cancelBubble()"
+                ng-mousemove="card.cancelBubble()"
+                    >
+                <div class="apix-toolbar-background"></div>
+                <div class="apix-toolbar-container">
+                    <a title="click to delete this card" class="apix-card-toolbar-icon apix-card-delete-icon"  ng-click="card.deleteCard($index)"></a>
+                    <a title="click to open dialog" class="apix-card-toolbar-icon apix-card-open-dialog-icon" ng-click="card.openDialog($index)"></a>
+                    <a title="click to selected this card" class="apix-card-toolbar-icon apix-card-selected-icon apix-card-selected-icon-unselected" ng-click="card.toogleSelectCard($event,$index)"></a>
+                </div>
+
+            </div>
+            <div current-repeated-card-data-renderer class="apix-card-wrapper" ng-if="!cardTemplate" ng-include="cardTemplateUrl"></div>
+        </div>
+        <div
+                ng-mouseenter="card.ifMouseInApixCardsBigToolbarArea=true"
+                ng-mouseleave="card.toolbarMouseLeave()"
+                ng-show="card.apixCardsBigToolbarShow" class="apix-cards-big-toolbar">
+            <div class="apix-toolbar-background"></div>
+            <div class="apix-toolbar-container">
+                <a title="click to delete all selected cards" class="apix-cards-big-toolbar-icon apix-cards-delete-icon"  ng-click="card.deleteSelectedCards()"></a>
+                <a title="click to cancel selected cards" class="apix-cards-big-toolbar-icon apix-cards-cancel-selected-icon" ng-click="card.cancelSelectedCards()"></a>
+                <a title="click to selected all cards" class="apix-cards-big-toolbar-icon apix-cards-selected-all-icon apix-cards-selected-all-icon-unselected" ng-click="card.toogleSelectedAllCards($event)"></a>
+            </div>
+        </div>
+</div>
