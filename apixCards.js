@@ -22,6 +22,65 @@
  * *** These prefixes can be concatenated to indicate that the variable can
  *         hold the specified types of data ***
  */
+/**
+ * call demo:
+ *
+ *  <div style="overflow-x:hidden;overflow-y:scroll;width:800px;height:400px;background:pink;margin:0 auto;">
+		 <cards-layout
+			 num-of-column="4"
+			 dialog-template-url= "./dialog.tpl.html"
+			 card-template-url= "./cards.tpl.html"
+			 apix-data="cardData"
+			 dialog-scope="dialogScope"
+		 >
+		 </cards-layout>
+ 	</div>
+
+
+	  @attr{num-of-column} Define how many column in a row of the card system.
+	  @attr{dialog-template-url}Define the template url of the dialog in the popup layer.
+	  @attr{card-template-url}It defines the template inner the card.
+	  @attr{apix-data}It defines all the data of the card.
+	  @attr{dialog-scope}Difines the scope of the dialog template
+
+
+ Events:
+	 * Usage:
+	 $scope.$on(sEventName,fCallback);
+		 Event lists:
+		 {cardSystemInitialEnd}When the cards layout system is ready will invoke it.
+			 @param{oEvent}Describe some attributes of current event.
+			 @param{cardService}It is the service-{card}.you can invoke some apis of the sercice-{card} by this cardService.
+		 {beforeCardDelete}When the delete icon in the toolbar of every card is deleted,this method will be invoked.
+		 					You can use "cardService.confirmDeleteCurrentCard()" to really delete current card.
+			 @param{oEvent}Describe some attributes of current event.
+			 @param{aSelectedCardsIndex}Current selected card's index number.
+		 {beforeSelectedCardsDelete}When you are try to deleting all the selected cards,
+		 							this method will be invoked.
+		 							You can use "cardService.confirmDeleteSelectedCards()" to really delete them.
+			 @param{oEvent}Describe some attributes of current event.
+			 @param{aSelectedCardsIndex}It is an array type,includes all the index of selected cards.
+		 {selectedCardsDeleteSuccess}When all the selected cards are really deleted,this method will be invoked.
+			 @param{oEvent}Describe some attributes of current event.
+			 @param{aSelectedCardsIndex}It is an array type,includes all the indexes of selected cards.
+		 {scrollBottom}When the scrollBar is scrolled to the bottom of the window,this method will be invoked.
+		 			at this time,you can show your custom loading layer and fetch more data.
+		 	@param{oEvent}Describe some attributes of current event.
+		 {dialogOpen}When you clicked the icon to open the dialog,this method will be invoked.
+			 @param{oEvent}Describe some attributes of current event.
+			 @param{nIndex}Index of current operating card.
+			 @param{oCurrentCardData}Include all the data of current operating card.
+		 {cardDeleteSuccess}When one card is really deleted,this method will be invoked.
+			 @param{oEvent}Describe some attributes of current event.
+			 @param{nCurrentDeletingCardIndex}It is the index of current deleting card.
+		 {cardMouseEnter}
+		 {cardMouseMove}
+		 {cardMouseLeave}
+		 {cardClick}
+		 			They are some dom operate for single card,maybe you will use them in some occasions.
+			 @param{oEvent}Describe some attributes of current event.
+			 @param{nIndex}Index of current operating card.
+ */
 (function() {
 	'use strict';
 	//Module definition.
